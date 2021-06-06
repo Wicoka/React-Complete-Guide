@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   // Az event.target.value mindig string lesz, ezért itt is strignet használunk
 
   // const [enteredTitle, setEnteredTitle] = useState('');
@@ -62,11 +62,15 @@ const ExpenseForm = () => {
       date: new Date(userInput.enteredDate)
     };
 
+    // Itt clear-elem a formom
     setUserInput({
       enteredTitle: '',
       enteredAmount: '',
       enteredDate: ''
-    })
+    });
+
+    // Itt "emitelem" az outputot
+    props.onSaveExpenseData(expenseData);
   };
 
   return (
