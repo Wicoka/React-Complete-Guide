@@ -52,20 +52,37 @@ const ExpenseForm = () => {
     });
   };
 
+  const submitHandler = (event) => {
+    // Ezzel a függvénnyel meg tudjuk akadályozni, hogy defaultból elküldjön egy requestet
+    event.preventDefault();
+
+    const expenseData = {
+      title: userInput.enteredTitle,
+      amount: userInput.enteredAmount,
+      date: new Date(userInput.enteredDate)
+    };
+
+    setUserInput({
+      enteredTitle: '',
+      enteredAmount: '',
+      enteredDate: ''
+    })
+  };
+
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" onChange={e => titleChangeHandler(e.target.value)} />
+          <input type="text" value={userInput.enteredTitle} onChange={e => titleChangeHandler(e.target.value)} />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
-          <input type="number" min="1" step="1" onChange={e => amountChangeHandler(e.target.value)} />
+          <input type="number" value={userInput.enteredAmount} min="1" step="1" onChange={e => amountChangeHandler(e.target.value)} />
         </div>
         <div className="new-expense__control">
           <label>Date</label>
-          <input type="date" min="2019-01-01" max="2022-12-31" onChange={e => dateChangeHandler(e.target.value)} />
+          <input type="date" value={userInput.enteredDate} min="2019-01-01" max="2022-12-31" onChange={e => dateChangeHandler(e.target.value)} />
         </div>
       </div>
       <div className="new-expense__actions">
