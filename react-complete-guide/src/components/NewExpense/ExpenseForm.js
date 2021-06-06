@@ -3,18 +3,53 @@ import './ExpenseForm.css';
 
 const ExpenseForm = () => {
   // Az event.target.value mindig string lesz, ezért itt is strignet használunk
-  const [enteredState, setEnteredTitle] = useState('');
-  const [enteredAmount, setEnteredAmount] = useState('');
-  const [enteredDate, setEnteredDate] = useState('');
+
+  // const [enteredTitle, setEnteredTitle] = useState('');
+  // const [enteredAmount, setEnteredAmount] = useState('');
+  // const [enteredDate, setEnteredDate] = useState('');
+  const [userInput, setUserInput] = useState({
+    enteredTitle: '',
+    enteredAmount: '',
+    enteredDate: ''
+  })
 
   const titleChangeHandler = (newTitle) => {
-    setEnteredTitle(newTitle);
+    // setUserInput({
+    //   ...userInput,
+    //   enteredTitle: newTitle
+    // });
+
+    // Így a React garantálja, hogy biztosan a legutolsó állapotot adja vissza
+    setUserInput((prevState) => {
+      return {
+        ...prevState,
+        enteredTitle: newTitle
+      };
+    });
   };
   const amountChangeHandler = (newAmount) => {
-    setEnteredAmount(newAmount);
+    // setUserInput({
+    //   ...userInput,
+    //   enteredAmount: newAmount
+    // });
+    setUserInput((prevState) => {
+      return {
+        ...prevState,
+        enteredAmount: newAmount
+      };
+    });
   };
   const dateChangeHandler = (newDate) => {
-    setEnteredDate(newDate);
+    // setUserInput({
+    //   ...userInput,
+    //   enteredDate: newDate
+    // });
+    setUserInput((prevState) => {
+      return {
+        ...prevState,
+        enteredDate: newDate
+      };
+    });
   };
 
   return (
