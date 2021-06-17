@@ -5,29 +5,31 @@ import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
 
 const Login = (props) => {
+  // Akkor jó használni reducer-t, hogy ha két state egymáshoz tartozik
   const [enteredEmail, setEnteredEmail] = useState('');
   const [emailIsValid, setEmailIsValid] = useState();
   const [enteredPassword, setEnteredPassword] = useState('');
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
-  useEffect(() => {
-    // Debounce Time megvalósítás
-    const identifier = setTimeout(() => {
-      console.log('Check form');
-      setFormIsValid(
-        enteredEmail.includes('@') && enteredPassword.trim().length > 6
-      );
-    }, 500);
+  // useEffect(() => {
+  //   // Debounce Time megvalósítás
+  //   const identifier = setTimeout(() => {
+  //     console.log('Check form');
+  //     setFormIsValid(
+  //       enteredEmail.includes('@') && enteredPassword.trim().length > 6
+  //     );
+  //   }, 500);
 
-    return () => {
-      console.log('Clean up!');
-      // Kitörli a timer-t
-      clearTimeout(identifier);
-    };
-    // Itt is csak a függvény pointert adjuk át (setFormIsValid)
-    // Ez akkor hívódik meg, ha a setFormIsValid lefut, vagy az enteredEmail vagy az enteredPassword változik
-  }, [enteredEmail, enteredPassword]);
+  //   // Ez a return függvény hamarabb fut le mint a felette lévő
+  //   return () => {
+  //     console.log('Clean up!');
+  //     // Kitörli a timer-t
+  //     clearTimeout(identifier);
+  //   };
+  //   // Itt is csak a függvény pointert adjuk át (setFormIsValid)
+  //   // Ez akkor hívódik meg, ha a setFormIsValid lefut, vagy az enteredEmail vagy az enteredPassword változik
+  // }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
