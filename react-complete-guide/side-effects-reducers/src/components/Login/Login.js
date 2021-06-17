@@ -12,9 +12,19 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes('@') && enteredPassword.trim().length > 6
-    );
+    // Debounce Time megvalósítás
+    const identifier = setTimeout(() => {
+      console.log('Check form');
+      setFormIsValid(
+        enteredEmail.includes('@') && enteredPassword.trim().length > 6
+      );
+    }, 500);
+
+    return () => {
+      console.log('Clean up!');
+      // Kitörli a timer-t
+      clearTimeout(identifier);
+    };
     // Itt is csak a függvény pointert adjuk át (setFormIsValid)
     // Ez akkor hívódik meg, ha a setFormIsValid lefut, vagy az enteredEmail vagy az enteredPassword változik
   }, [enteredEmail, enteredPassword]);
